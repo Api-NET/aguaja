@@ -3,7 +3,7 @@ using Repository.Entity;
 
 namespace Repository.Map
 {
-    class MapSeller
+    public class MapSeller
     {
         public MapSeller(EntityTypeBuilder<Seller> etSeller)
         {
