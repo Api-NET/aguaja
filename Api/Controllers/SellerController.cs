@@ -33,5 +33,23 @@ namespace Api.Controllers
         {
             return _sellerInterface.Get(id);
         }
+
+        [HttpPost]
+        public void Post([FromBody] Seller seller)
+        {
+            _sellerInterface.Insert(seller);
+        }
+
+        [HttpPost]
+        public void Put([FromBody] Seller seller)
+        {
+            _sellerInterface.Update(seller);
+        }
+
+        [HttpDelete]
+        public void Delete([FromBody] Seller seller)
+        {
+            _sellerInterface.Delete(seller);
+        }
     }
 }
