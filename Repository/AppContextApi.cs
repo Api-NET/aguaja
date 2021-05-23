@@ -16,6 +16,7 @@ namespace Repository
             base.OnModelCreating(model);
 
             new MapSeller(model.Entity<Seller>());
+            new MapClient(model.Entity<Client>());
         }
 
     }
