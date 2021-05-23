@@ -1,0 +1,150 @@
+-- DROP SCHEMA dbo;
+
+CREATE SCHEMA dbo;
+-- faculdade.dbo.tb_address definition
+
+-- Drop table
+
+-- DROP TABLE faculdade.dbo.tb_address GO
+
+CREATE TABLE faculdade.dbo.tb_address (
+	id int IDENTITY(1,1) NOT NULL,
+	complement varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	neighborhood varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	[number] int NULL,
+	street varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	CONSTRAINT tb_address_pkey PRIMARY KEY (id)
+) GO;
+
+
+-- faculdade.dbo.tb_phone definition
+
+-- Drop table
+
+-- DROP TABLE faculdade.dbo.tb_phone GO
+
+CREATE TABLE faculdade.dbo.tb_phone (
+	id int IDENTITY(1,1) NOT NULL,
+	ddd varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	[number] varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	CONSTRAINT tb_phone_pkey PRIMARY KEY (id)
+) GO;
+
+
+-- faculdade.dbo.tb_product definition
+
+-- Drop table
+
+-- DROP TABLE faculdade.dbo.tb_product GO
+
+CREATE TABLE faculdade.dbo.tb_product (
+	id int IDENTITY(1,1) NOT NULL,
+	description varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	liters float NULL,
+	name varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	url_image varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	CONSTRAINT tb_product_pkey PRIMARY KEY (id)
+) GO;
+
+
+-- faculdade.dbo.tb_client definition
+
+-- Drop table
+
+-- DROP TABLE faculdade.dbo.tb_client GO
+
+CREATE TABLE faculdade.dbo.tb_client (
+	id int IDENTITY(1,1) NOT NULL,
+	admin bit NULL,
+	birth_date datetime NULL,
+	email varchar(255) COLLATE Latin1_General_CI_AS NOT NULL,
+	gender varchar(1) COLLATE Latin1_General_CI_AS NULL,
+	name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL,
+	password varchar(255) COLLATE Latin1_General_CI_AS NOT NULL,
+	username varchar(255) COLLATE Latin1_General_CI_AS NOT NULL,
+	address_id int NOT NULL,
+	phone_id int NOT NULL,
+	CONSTRAINT tb_client_pkey PRIMARY KEY (id),
+	CONSTRAINT tb_client_FK FOREIGN KEY (address_id) REFERENCES faculdade.dbo.tb_address(id) ON DELETE CASCADE,
+	CONSTRAINT tb_client_FK_1 FOREIGN KEY (phone_id) REFERENCES faculdade.dbo.tb_phone(id) ON DELETE CASCADE
+) GO;
+
+
+-- faculdade.dbo.tb_seller definition
+
+-- Drop table
+
+-- DROP TABLE faculdade.dbo.tb_seller GO
+
+CREATE TABLE faculdade.dbo.tb_seller (
+	id int IDENTITY(1,1) NOT NULL,
+	admin bit NULL,
+	birth_date datetime NULL,
+	email varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	gender varchar(1) COLLATE Latin1_General_CI_AS NULL,
+	name varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	password varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	username varchar(255) COLLATE Latin1_General_CI_AS NULL,
+	address_id int NULL,
+	phone_id int NULL,
+	CONSTRAINT tb_seller_pkey PRIMARY KEY (id),
+	CONSTRAINT tb_seller_FK FOREIGN KEY (address_id) REFERENCES faculdade.dbo.tb_address(id),
+	CONSTRAINT tb_seller_FK_1 FOREIGN KEY (phone_id) REFERENCES faculdade.dbo.tb_phone(id)
+) GO;
+
+
+-- faculdade.dbo.tb_stock definition
+
+-- Drop table
+
+-- DROP TABLE faculdade.dbo.tb_stock GO
+
+CREATE TABLE faculdade.dbo.tb_stock (
+	id int IDENTITY(1,1) NOT NULL,
+	cost_price float NULL,
+	cost_sell float NULL,
+	entry_date datetime NULL,
+	quantity int NULL,
+	product_id int NULL,
+	seller_id int NULL,
+	CONSTRAINT tb_stock_pkey PRIMARY KEY (id),
+	CONSTRAINT tb_stock_FK FOREIGN KEY (seller_id) REFERENCES faculdade.dbo.tb_seller(id),
+	CONSTRAINT tb_stock_FK_1 FOREIGN KEY (product_id) REFERENCES faculdade.dbo.tb_product(id)
+) GO;
+
+
+-- faculdade.dbo.tb_order definition
+
+-- Drop table
+
+-- DROP TABLE faculdade.dbo.tb_order GO
+
+CREATE TABLE faculdade.dbo.tb_order (
+	id int IDENTITY(1,1) NOT NULL,
+	[date] date NULL,
+	discount float NULL,
+	order_status int NULL,
+	price float NULL,
+	price_total float NULL,
+	client_id int NULL,
+	seller_id int NULL,
+	CONSTRAINT tb_order_pkey PRIMARY KEY (id),
+	CONSTRAINT tb_order_FK FOREIGN KEY (client_id) REFERENCES faculdade.dbo.tb_client(id) ON DELETE CASCADE,
+	CONSTRAINT tb_order_FK_1 FOREIGN KEY (seller_id) REFERENCES faculdade.dbo.tb_seller(id) ON DELETE CASCADE
+) GO;
+
+
+-- faculdade.dbo.tb_order_item definition
+
+-- Drop table
+
+-- DROP TABLE faculdade.dbo.tb_order_item GO
+
+CREATE TABLE faculdade.dbo.tb_order_item (
+	quantity int NULL,
+	stock_id int NOT NULL,
+	order_id int NOT NULL,
+	CONSTRAINT tb_order_item_pkey PRIMARY KEY (order_id,stock_id),
+	CONSTRAINT tb_order_item_FK FOREIGN KEY (stock_id) REFERENCES faculdade.dbo.tb_stock(id),
+	CONSTRAINT tb_order_item_FK_1 FOREIGN KEY (order_id) REFERENCES faculdade.dbo.tb_order(id)
+) GO;;
