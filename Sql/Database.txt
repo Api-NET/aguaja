@@ -148,3 +148,26 @@ CREATE TABLE faculdade.dbo.tb_order_item (
 	CONSTRAINT tb_order_item_FK FOREIGN KEY (stock_id) REFERENCES faculdade.dbo.tb_stock(id),
 	CONSTRAINT tb_order_item_FK_1 FOREIGN KEY (order_id) REFERENCES faculdade.dbo.tb_order(id)
 ) GO;;
+
+
+// ------------------------------------------------------------------------------------------------
+1 - DROP EM tb_order_item e recriação
+
+- Adição do campo ID
+- Adição do campo price
+
+CREATE TABLE faculdade.dbo.tb_order_item (
+	id int IDENTITY(0,1) NOT NULL,
+	order_id int NOT NULL,
+	stock_id int NOT NULL,
+	quantity int NOT NULL,
+	price float NOT NULL
+);
+
+ALTER TABLE faculdade.dbo.tb_order_item ADD CONSTRAINT tb_order_item_FK_2 FOREIGN KEY (stock_id) REFERENCES faculdade.dbo.tb_stock(id);
+ALTER TABLE faculdade.dbo.tb_order_item ADD CONSTRAINT tb_order_item_FK_3 FOREIGN KEY (order_id) REFERENCES faculdade.dbo.tb_order(id);
+
+
+2 - DROP COLUMN em duas colunas de tb_order sem sentido, visto que deveriam estar em tb_order_item
+ALTER TABLE faculdade.dbo.tb_order DROP COLUMN price
+ALTER TABLE faculdade.dbo.tb_order DROP COLUMN price_total
