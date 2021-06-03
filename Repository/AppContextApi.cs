@@ -19,6 +19,10 @@ namespace Repository
             new MapClient(model.Entity<Client>());
             new MapProduct(model.Entity<Product>());
             new MapStock(model.Entity<Stock>());
+            new MapOrder(model.Entity<Order>());
+            new MapOrderItem(model.Entity<OrderItem>());
+            new MapAddress(model.Entity<Address>());
+            new MapPhone(model.Entity<Phone>());
         }
 
     }

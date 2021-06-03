@@ -34,6 +34,10 @@ namespace Api
             services.AddTransient<IClient, ClientService>();
             services.AddTransient<IProduct, ProductService>();
             services.AddTransient<IStock, StockService>();
+            services.AddTransient<IOrder, OrderService>();
+            services.AddTransient<IOrderItem, OrderItemService>();
+            services.AddTransient<IAddress, AddressService>();
+            services.AddTransient<IPhone, PhoneService>();
 
             services.AddControllers();
 
