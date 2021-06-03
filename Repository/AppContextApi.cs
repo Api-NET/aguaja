@@ -17,6 +17,7 @@ namespace Repository
 
             new MapSeller(model.Entity<Seller>());
             new MapClient(model.Entity<Client>());
+            new MapProduct(model.Entity<Product>());
         }
 
     }
