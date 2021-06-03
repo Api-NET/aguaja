@@ -40,7 +40,7 @@ namespace Api.Controllers
             _clientInterface.Insert(client);
         }
 
-        [HttpPost]
+        [HttpPut]
         public void Put([FromBody] Client client)
         {
             _clientInterface.Update(client);

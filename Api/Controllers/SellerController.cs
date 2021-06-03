@@ -40,7 +40,7 @@ namespace Api.Controllers
             _sellerInterface.Insert(seller);
         }
 
-        [HttpPost]
+        [HttpPut]
         public void Put([FromBody] Seller seller)
         {
             _sellerInterface.Update(seller);
