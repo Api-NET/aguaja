@@ -33,6 +33,7 @@ namespace Api
             services.AddTransient<ISeller, SellerService>();
             services.AddTransient<IClient, ClientService>();
             services.AddTransient<IProduct, ProductService>();
+            services.AddTransient<IStock, StockService>();
 
             services.AddControllers();
 
