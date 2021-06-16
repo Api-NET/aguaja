@@ -27,7 +27,7 @@ namespace Service.Services
 
         public IEnumerable<OrderItem> GetAll()
         {
-            return _repositoryBase.GetAll();
+            return _repositoryBase.GetAll("");
         }
 
         public void Insert(OrderItem orderItem)

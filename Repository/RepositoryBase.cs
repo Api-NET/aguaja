@@ -27,12 +27,21 @@ namespace Repository
 
         public TEntity Get(int id)
         {
+
             return _entities.Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll(string ligacao)
         {
-            IQueryable<TEntity> query = _entities;
+            IQueryable<TEntity> query;
+
+            if (string.IsNullOrEmpty(ligacao))
+            {
+                query = _entities;
+            }else
+            {
+                query = _entities.AsNoTracking().AsQueryable().Include(ligacao);
+            }
             return query.ToList();
         }
 

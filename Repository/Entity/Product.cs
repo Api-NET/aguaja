@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Repository.Entity
 {
@@ -14,5 +15,7 @@ namespace Repository.Entity
         public string Url_image { get; set; }
         public string Name { get; set; }
         public double Liters { get; set; }
+        [JsonIgnore]
+        public IList<Stock> Stocks { get; set; }
     }
 }

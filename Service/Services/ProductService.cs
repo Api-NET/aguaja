@@ -27,7 +27,7 @@ namespace Service.Services
 
         public IEnumerable<Product> GetAll()
         {
-            return _repositoryBase.GetAll();
+            return _repositoryBase.GetAll("Stocks");
         }
 
         public void Insert(Product product)

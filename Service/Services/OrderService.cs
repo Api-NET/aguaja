@@ -27,7 +27,7 @@ namespace Service.Services
 
         public IEnumerable<Order> GetAll()
         {
-            return _repositoryBase.GetAll();
+            return _repositoryBase.GetAll("");
         }
 
         public void Insert(Order order)

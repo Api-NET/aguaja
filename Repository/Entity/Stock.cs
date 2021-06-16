@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Repository.Entity
 {
@@ -16,6 +17,8 @@ namespace Repository.Entity
         public int Quantity { get; set; } 
         public int Product_id { get; set; }
         public int Seller_id { get; set; }
+        
+        public Product Product { get; set; }
 
     }
 }
